@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+        }
+        #expense-pie-chart {
+            display: none; /* Hide the chart by default */
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-bold text-center text-gray-700 mb-8">Expense Tracker</h1>
+
+        <!-- Balance Display -->
+        <div class="text-center mb-8">
+            <h2 class="text-xl text-gray-500">Your Balance</h2>
+            <p id="balance" class="text-4xl font-bold text-green-500">₹0.00</p>
+        </div>
+
+        <!-- Income and Expense Display -->
+        <div class="flex justify-around text-center mb-8">
+            <div class="w-1/2 p-4 bg-green-100 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold text-green-600">Income</h3>
+                <p id="money-plus" class="text-2xl font-bold text-green-800">₹0.00</p>
+            </div>
+            <div class="w-1/2 p-4 bg-red-100 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold text-red-600">Expense</h3>
+                <p id="money-minus" class="text-2xl font-bold text-red-800">₹0.00</p>
+            </div>
+        </div>
+
+
+
+        <!-- Add Expense Form -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-semibold mb-4">Add Expense</h2>
+            <div class="mb-4">
+                <input type="text" id="description" placeholder="Description" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <input type="number" id="amount" placeholder="Amount" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button onclick="addTransaction('credit')" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Add Credit</button>
+                <button onclick="addTransaction('debit')" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Add Debit</button>
+                <button onclick="exportData()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Export Data</button>
+
+            </div>
+        </div>
+
+        <!-- Expense History -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-semibold mb-4">Expense History</h2>
+            <ul id="expense-history" class="space-y-4">
+                <!-- Expenses will be dynamically added here -->
+            </ul>
+        </div>
+
+
+        <!-- Export Data Button -->
+        <div class="flex justify-center">
+            <!--<button onclick="exportData()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Export Data</button> -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
